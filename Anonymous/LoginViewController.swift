@@ -43,6 +43,14 @@ class LoginViewController: UIViewController {
   
   // MARK: - Notifications
   
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        let navVc = segue.destination as! UINavigationController // 1
+        let channelVc = navVc.viewControllers.first as! ChannelListViewController // 2
+        
+        channelVc.senderDisplayName = nameField?.text // 3
+    }
+
   func keyboardWillShowNotification(_ notification: Notification) {
     let keyboardEndFrame = ((notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
     let convertedKeyboardEndFrame = view.convert(keyboardEndFrame, from: view.window)
